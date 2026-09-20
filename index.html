@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Habib Digital Institute — Application</title>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '987425530787333');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=987425530787333&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0B1F3B;
+    --steel:#2F6DAA;
+    --gold:#F5B800;
+    --grey:#E6EAF0;
+    --white:#FFFFFF;
+    --near-black:#0A0D12;
+    --muted:#9FB0CC;
+    --line:rgba(230,234,240,0.16);
+    --line-strong:rgba(245,184,0,0.5);
+    --panel:rgba(47,109,170,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(135deg, rgba(47,109,170,0.05) 0px, rgba(47,109,170,0.05) 1px, transparent 1px, transparent 34px),
+      var(--near-black);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  h1,h2,h3{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0 0 10px 0;
+    color:var(--white);
+  }
+  p{margin:0 0 12px 0; color:var(--muted);}
+  a{color:var(--gold);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .shell{max-width:520px; margin:0 auto; min-height:100vh; position:relative; padding-bottom:88px; background:var(--ink); box-shadow:0 0 60px rgba(0,0,0,0.5);}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px; border-bottom:1px solid var(--line);
+    background:var(--near-black);
+  }
+  .mark{font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:var(--white); display:flex; align-items:center; gap:7px;}
+  .mark .dot{width:7px; height:7px; background:var(--gold);}
+  .mark span{color:var(--gold);}
+  .step-tag{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--muted); letter-spacing:0.04em;}
+  .step-tag b{color:var(--gold);}
+
+  .segbar{display:flex; gap:3px; padding:0; height:3px; background:var(--near-black);}
+  .seg{flex:1; height:3px; background:rgba(255,255,255,0.08);}
+  .seg.done{background:var(--gold);}
+
+  .pad{padding:24px 20px 20px 20px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:600;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+    display:inline-block; border:1px solid var(--line-strong); padding:4px 9px;
+  }
+
+  .bottom-bar{
+    position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+    width:100%; max-width:520px; background:var(--near-black);
+    border-top:1px solid var(--gold); padding:14px 20px;
+    z-index:40;
+  }
+  .btn{
+    width:100%; border:none; border-radius:0;
+    font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:16px;
+    letter-spacing:0.03em; text-transform:uppercase;
+    padding:16px; cursor:pointer; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn-gold{background:var(--gold); color:var(--near-black);}
+  .btn-steel{background:var(--steel); color:var(--white);}
+  .btn-ghost{background:transparent; color:var(--white); border:1px solid var(--line);}
+  .btn-text{background:none; border:none; color:var(--muted); font-size:13px; text-decoration:underline; cursor:pointer; padding:8px; font-family:'Inter',sans-serif; text-transform:none;}
+
+  /* panel = the redesigned "block" — left gold rail + mono index tag, sharp corners */
+  .panel{border:1px solid var(--line); border-left:3px solid var(--gold); padding:16px 16px 16px 18px; margin-bottom:14px; background:var(--panel); position:relative;}
+  .panel-head{display:flex; align-items:baseline; gap:9px; margin-bottom:6px;}
+  .panel-num{font-family:'JetBrains Mono',monospace; color:var(--gold); font-weight:700; font-size:12px;}
+
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; border:1px solid var(--line); border-radius:0;
+    padding:13px 14px; font-family:'Inter',sans-serif; font-size:15px; color:var(--white);
+    background:rgba(255,255,255,0.04);
+  }
+  .field textarea{resize:vertical; min-height:84px;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--gold);}
+  .field .hint{font-size:12.5px; color:var(--muted); margin-top:5px;}
+  .field option{color:#000;}
+  .field-error{color:#FF8A80; font-size:13px; margin:6px 0 4px 0; min-height:16px;}
+
+  .gate-row{display:flex; gap:10px; margin-bottom:16px;}
+  .gate-tile{
+    flex:1; border:1px solid var(--line); border-radius:0;
+    padding:14px 10px; text-align:center; cursor:pointer;
+    font-size:13.5px; font-weight:600; color:var(--white); background:rgba(255,255,255,0.03);
+  }
+  .gate-tile.selected{border-color:var(--gold); background:rgba(245,184,0,0.12); color:var(--gold);}
+
+  .price-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 0; border-bottom:1px dashed var(--line); font-size:14.5px;
+  }
+  .price-row:last-child{border-bottom:none;}
+  .price-row .amt{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--gold); font-size:15px;}
+
+  .id-strip{
+    border:1px solid var(--gold); padding:14px 16px; margin-bottom:16px;
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    background:rgba(245,184,0,0.06);
+  }
+  .id-strip .lbl{font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted);}
+  .id-strip .val{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:17px; color:var(--gold);}
+  .copy-btn{
+    flex:0 0 auto; background:var(--gold); color:var(--near-black); border:none; border-radius:0;
+    font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; padding:9px 12px; cursor:pointer; text-transform:uppercase;
+  }
+  .copy-btn.copied{background:#3FA25C; color:#fff;}
+
+  .pay-card{border:1px solid var(--line); border-top:2px solid var(--gold); padding:16px; margin-bottom:12px; background:rgba(255,255,255,0.03);}
+  .pay-card .cap{font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:6px;}
+  .pay-card .amount{font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:700; color:var(--white); margin-bottom:10px;}
+  .pay-card .row{display:flex; justify-content:space-between; font-size:14px; padding:7px 0; border-top:1px dashed var(--line);}
+  .pay-card .row span{color:var(--muted);}
+  .pay-card .row b{color:var(--white); font-weight:600; font-family:'JetBrains Mono',monospace; font-size:13.5px;}
+  .nestuge-btn{display:block; text-align:center; background:var(--steel); color:var(--white); font-family:'Barlow Condensed',sans-serif; font-weight:800; letter-spacing:0.03em; text-transform:uppercase; padding:15px; text-decoration:none; margin-bottom:10px;}
+  .or-div{display:flex; align-items:center; gap:10px; margin:12px 0; color:var(--muted); font-size:11px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.08em;}
+  .or-div::before, .or-div::after{content:''; flex:1; height:1px; background:var(--line);}
+
+  .accordion-item{border-bottom:1px solid var(--line); padding:14px 0;}
+  .accordion-item summary{font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:15.5px; cursor:pointer; list-style:none; color:var(--white); text-transform:uppercase; letter-spacing:0.01em;}
+  .accordion-item summary::-webkit-details-marker{display:none;}
+  .accordion-item summary::after{content:'+'; float:right; color:var(--gold);}
+  .accordion-item[open] summary::after{content:'–';}
+  .accordion-item .a-body{font-size:14px; color:var(--muted); margin-top:8px;}
+
+  .center{padding:60px 24px 90px 24px; text-align:center;}
+  .center .badge{width:58px; height:58px; border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:24px; margin:0 auto 18px auto; color:var(--gold);}
+  .center .badge.closed{border-color:var(--line); color:var(--muted);}
+  .center p{max-width:380px; margin-left:auto; margin-right:auto;}
+  .fine{font-size:12px; color:var(--muted); margin-top:30px; font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;}
+
+  .video-slot{width:100%; max-width:320px; aspect-ratio:9/16; margin:16px auto; border:1px solid var(--line); border-top:2px solid var(--gold); display:block; overflow:hidden; object-fit:cover; background:#000;}
+  .video-slot iframe{width:100%; height:100%; border:0;}
+  .phone-row{display:flex; gap:8px;}
+  .phone-row select{flex:0 0 92px;}
+
+  .notice-banner{background:rgba(245,184,0,0.12); border:1px solid var(--gold); color:var(--gold); font-size:12.5px; padding:9px 20px; text-align:center; font-family:'JetBrains Mono',monospace;}
+
+  .balloon-field{position:relative; height:70px; margin-bottom:8px; overflow:hidden;}
+  .balloon{position:absolute; bottom:-40px; font-size:26px; animation:balloonPop 3.2s ease-in infinite;}
+  .balloon:nth-child(1){left:14%; animation-delay:0s;}
+  .balloon:nth-child(2){left:34%; animation-delay:0.5s; font-size:22px;}
+  .balloon:nth-child(3){left:50%; animation-delay:0.2s; font-size:30px;}
+  .balloon:nth-child(4){left:66%; animation-delay:0.9s; font-size:22px;}
+  .balloon:nth-child(5){left:84%; animation-delay:0.35s;}
+  @keyframes balloonPop{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    12%{ opacity:1; }
+    75%{ opacity:1; }
+    100%{ transform:translateY(-160px) rotate(8deg); opacity:0; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div id="storageWarn" class="notice-banner" style="display:none;">Your browser is blocking saved progress — you can still continue, but a refresh may reset this form.</div>
+  <div id="app"></div>
+</div>
+
+<script>
+/* ============ CORE STATE / TRACKING ============ */
+const STORAGE_KEY = 'hdi_application_v4';
+const REVIEW_WHATSAPP_NUMBER = '2348112033869';
+const LEADS_WEBHOOK_URL = 'https://hdi-leads-collector.habibdigitalinstitute.workers.dev/';
+const NESTUGE_LINK = 'https://nestuge.com/cpyuic4zx';
+
+function sendToSheet(eventName){
+  try{
+    const payload = {
+      event: eventName, hdiId: state.hdiId,
+      fullName: state.details.fullName, email: state.details.email,
+      whatsapp: state.details.whatsapp, whatsappCode: state.details.whatsappCode,
+      country: state.details.country, businessName: state.details.businessName, businessType: state.details.businessType,
+      q1: state.qual.q1, q2: state.qual.q2, q3: state.qual.q3, q4: state.qual.q4, q5: state.qual.q5, q6: state.qual.q6,
+      category: state.qual.category, disqualificationReason: state.qual.disqualificationReason,
+      paymentStatus: state.payment.status, paymentMethod: state.payment.method, paymentReference: state.payment.reference
+    };
+    fetch(LEADS_WEBHOOK_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(function(){});
+  }catch(e){}
+}
+
+let storageOK = true;
+function defaultState(){
+  return {
+    page: 'opening',
+    details: { fullName:'', email:'', whatsapp:'', whatsappCode:'+234', country:'', businessName:'', businessType:'' },
+    qual: { q1:'', q2:'', q3:'', q4:'', q5:'', q6:'', category:'', disqualificationReason:'' },
+    payment: { method:'', reference:'', status:'unpaid' },
+    intlTab: 'USD',
+    hdiId: ''
+  };
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultState();
+    const saved = JSON.parse(raw);
+    return Object.assign(defaultState(), saved, {
+      details: Object.assign(defaultState().details, saved.details || {}),
+      qual: Object.assign(defaultState().qual, saved.qual || {}),
+      payment: Object.assign(defaultState().payment, saved.payment || {})
+    });
+  }catch(e){ storageOK = false; return defaultState(); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); storageOK = true; }
+  catch(e){ storageOK = false; }
+  updateStorageWarning();
+}
+function updateStorageWarning(){
+  const w = document.getElementById('storageWarn');
+  if(w) w.style.display = storageOK ? 'none' : 'block';
+}
+let state = loadState();
+
+function generateHdiId(){
+  return 'HDI ' + Math.floor(10000 + Math.random() * 90000);
+}
+if(!state.hdiId){ state.hdiId = generateHdiId(); saveState(); sendToSheet('funnel_started'); }
+
+(function checkVerifiedLink(){
+  try{
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('verified') === '1' && state.payment.status === 'pending'){
+      state.payment.status = 'confirmed'; state.page = 'access'; saveState(); sendToSheet('access_granted');
+    }
+  }catch(e){}
+})();
+
+/* ============ REFERENCE DATA ============ */
+const COUNTRY_GROUPS = {
+  "Nigeria": "NG",
+  "Cameroon": "AFRICA_OTHER",
+  "Ghana": "AFRICA_OTHER",
+  "Kenya": "AFRICA_OTHER",
+  "South Africa": "AFRICA_OTHER",
+  "Uganda": "AFRICA_OTHER",
+  "Other African Country": "AFRICA_OTHER",
+  "Sierra Leone": "SL",
+  "United Kingdom": "INTL",
+  "United States": "INTL",
+  "Other (International)": "INTL"
+};
+const FLAGS = {
+  "Nigeria":"🇳🇬","Cameroon":"🇨🇲","Ghana":"🇬🇭","Kenya":"🇰🇪","South Africa":"🇿🇦","Uganda":"🇺🇬",
+  "Other African Country":"🌍","Sierra Leone":"🇸🇱","United Kingdom":"🇬🇧",
+  "United States":"🇺🇸","Other (International)":"🌐"
+};
+const DIAL_CODES = [
+  { country:"Nigeria", flag:"🇳🇬", code:"+234" },
+  { country:"Cameroon", flag:"🇨🇲", code:"+237" },
+  { country:"Ghana", flag:"🇬🇭", code:"+233" },
+  { country:"Kenya", flag:"🇰🇪", code:"+254" },
+  { country:"South Africa", flag:"🇿🇦", code:"+27" },
+  { country:"Uganda", flag:"🇺🇬", code:"+256" },
+  { country:"Sierra Leone", flag:"🇸🇱", code:"+232" },
+  { country:"United Kingdom", flag:"🇬🇧", code:"+44" },
+  { country:"United States", flag:"🇺🇸", code:"+1" },
+  { country:"Other African Country", flag:"🌍", code:"+" },
+  { country:"Other (International)", flag:"🌐", code:"+" }
+];
+/* ₦5,000 offer — rounded, clean prices per country */
+const PRICE_DISPLAY = [
+  { country:"Nigeria", amount:"₦5,000", currency:"NGN" },
+  { country:"Cameroon", amount:"2,700 XAF", currency:"XAF" },
+  { country:"Ghana", amount:"53 GHS", currency:"GHS" },
+  { country:"Sierra Leone", amount:"105 NLE", currency:"NLE" },
+  { country:"South Africa", amount:"96 ZAR", currency:"ZAR" },
+  { country:"Uganda", amount:"17,000 UGX", currency:"UGX" },
+  { country:"Kenya", amount:"700 KES", currency:"KES" },
+  { country:"United States", amount:"$6", currency:"USD" },
+  { country:"United Kingdom", amount:"£5", currency:"GBP" }
+];
+function priceFor(country){
+  const found = PRICE_DISPLAY.find(p=>p.country===country);
+  return found ? found.amount : '$6';
+}
+
+/* ============ RENDER HELPERS ============ */
+const app = document.getElementById('app');
+function mark(){ return `<div class="topbar"><div class="mark"><span class="dot"></span>HABIB DIGITAL <span>INSTITUTE</span></div></div>`; }
+function segbar(step, total){
+  if(!step) return '';
+  let segs = '';
+  for(let i=1;i<=total;i++){ segs += `<div class="seg ${i<=step?'done':''}"></div>`; }
+  return `<div class="segbar">${segs}</div>`;
+}
+function copyHdiId(){
+  const btn = document.getElementById('copyBtn'); const text = state.hdiId;
+  function showCopied(){ if(!btn) return; const o=btn.textContent; btn.textContent='Copied'; btn.classList.add('copied'); setTimeout(function(){btn.textContent=o; btn.classList.remove('copied');},1800); }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(showCopied).catch(function(){fallbackCopy(text,showCopied);}); }
+  else { fallbackCopy(text, showCopied); }
+}
+function fallbackCopy(text, cb){
+  try{ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); if(cb) cb(); }catch(e){}
+}
+function autosaveField(section, key, value){ if(!state[section]) return; state[section][key] = value; saveState(); }
+
+/* ============ NAVIGATION (forward-only — no back button, no way back once disqualified) ============ */
+function go(page){
+  state.page = page; saveState(); render();
+  if(page === 'disqualified'){
+    try{ history.pushState({disqualified:true}, '', '#disqualified'); }catch(e){}
+  }
+  try{window.scrollTo(0,0);}catch(e){}
+}
+window.addEventListener('popstate', function(){
+  if(state.qual.category === 'Disqualified' && state.page !== 'disqualified'){
+    state.page = 'disqualified'; saveState(); render();
+    try{ history.pushState({disqualified:true}, '', '#disqualified'); }catch(e){}
+  }
+});
+
+/* ============ PAGE: OPENING ============ */
+function pageOpening(){
+  return `
+    ${mark()}
+    <div class="pad">
+      <video class="video-slot" id="videoSlot" autoplay muted playsinline webkit-playsinline src="InShot_20260916_204326083.mp4"></video>
+      <div class="eyebrow">For businesses selling on WhatsApp</div>
+      <h1 style="font-size:32px;">People message you. Most of them never buy.</h1>
+      <p>If enquiries go quiet after the price, or interested people just stop replying, the problem usually isn't your product. It's what happens in the conversation after "how much."</p>
+      <div class="panel"><div class="panel-head"><span class="panel-num">01</span><h3 style="margin:0; font-size:16px;">The Problem</h3></div><p style="margin:0;">Enquiries come in, but they don't turn into sales.</p></div>
+      <div class="panel"><div class="panel-head"><span class="panel-num">02</span><h3 style="margin:0; font-size:16px;">The Fix</h3></div><p style="margin:0;">A system for following up and closing, not just replying.</p></div>
+      <div class="panel"><div class="panel-head"><span class="panel-num">03</span><h3 style="margin:0; font-size:16px;">The Result</h3></div><p style="margin:0;">More of your existing enquiries actually convert.</p></div>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="go('learn')">I Want This Fixed →</button></div>
+  `;
+}
+
+/* ============ PAGE: LEARN (full curriculum) ============ */
+const CURRICULUM = [
+  { icon:'🧠', title:'The WhatsApp Sales Mindset & Setup', trainings:[
+      { icon:'🛠️', title:'Setting Up A WhatsApp That Sells', subs:[
+        {icon:'👤', t:'Turning your WhatsApp into a business profile buyers trust'},
+        {icon:'🗂️', t:'Structuring your catalog so people scroll and buy'},
+        {icon:'💬', t:"Writing a greeting message that pre-sells"},
+        {icon:'⚡', t:'Setting quick replies for common questions'},
+        {icon:'🏷️', t:'Using labels to track hot vs cold leads'},
+        {icon:'🌙', t:'The "away message" that keeps selling while you sleep'}
+      ]},
+      { icon:'🔍', title:'Understanding Why Buyers Go Quiet', subs:[
+        {icon:'❓', t:'The real reason people ask "how much" and disappear'},
+        {icon:'🎯', t:'Spotting a serious buyer vs a window shopper'},
+        {icon:'🤫', t:"What silence actually means (it's rarely a no)"},
+        {icon:'🤝', t:'The trust gap that kills WhatsApp sales'},
+        {icon:'💭', t:"Why price isn't usually the real objection"},
+        {icon:'📱', t:'The psychology of buying on a chat app vs a website'}
+      ]}
+  ]},
+  { icon:'💬', title:'The Follow-Up System', trainings:[
+      { icon:'🔁', title:'Bringing Quiet Leads Back To Life', subs:[
+        {icon:'3️⃣', t:"The 3-message follow-up sequence that doesn't feel pushy"},
+        {icon:'📅', t:'What to say on day 1, day 3, and day 7'},
+        {icon:'🎙️', t:'Using voice notes to reopen a dead conversation'},
+        {icon:'📥', t:'Re-engaging old chats sitting in your inbox right now'},
+        {icon:'⏰', t:'Timing your follow-up so it lands, not annoys'},
+        {icon:'🔄', t:'Turning "let me think about it" into a yes'}
+      ]},
+      { icon:'📋', title:'Organizing Your Enquiries So None Get Lost', subs:[
+        {icon:'📊', t:'Building a simple lead tracker for WhatsApp'},
+        {icon:'🏷️', t:'Labels and folders that keep hot leads visible'},
+        {icon:'🕒', t:'A daily follow-up routine in under 15 minutes'},
+        {icon:'☀️', t:'Knowing who to message first every morning'},
+        {icon:'🗄️', t:'Archiving dead leads without losing them forever'},
+        {icon:'📢', t:'Using broadcast lists the right way (not spam)'}
+      ]}
+  ]},
+  { icon:'💰', title:'Turning Enquiries Into Sales', trainings:[
+      { icon:'🎯', title:'What To Say The Moment They Ask The Price', subs:[
+        {icon:'💡', t:'The price-reveal framework that keeps them engaged'},
+        {icon:'⚖️', t:'Anchoring value before you mention a number'},
+        {icon:'🙅', t:'Handling "it\'s too expensive" without discounting'},
+        {icon:'📦', t:'Bundling and upselling inside a chat conversation'},
+        {icon:'⏳', t:'Using urgency and scarcity honestly, not gimmicky'},
+        {icon:'📝', t:'Scripts for the most common WhatsApp objections'}
+      ]},
+      { icon:'✅', title:'Closing Without Being Pushy', subs:[
+        {icon:'🔑', t:'The closing question that gets a decision, not silence'},
+        {icon:'💳', t:'Making payment easy inside the chat'},
+        {icon:'📩', t:"Confirming the sale so they don't back out"},
+        {icon:'🎁', t:'What to send right after they pay'},
+        {icon:'🔂', t:'Turning one sale into a repeat customer'},
+        {icon:'🙋', t:'Asking for referrals at the right moment'}
+      ]}
+  ]},
+  { icon:'🚀', title:'Scaling Your WhatsApp Sales System', trainings:[
+      { icon:'📈', title:'Handling More Enquiries Without Burning Out', subs:[
+        {icon:'🧩', t:'Templates that save you hours every week'},
+        {icon:'📤', t:'Batching replies without losing the personal touch'},
+        {icon:'🧑‍💼', t:'When and how to bring in help (a VA or team member)'},
+        {icon:'🤖', t:'Automating the repetitive 20% of conversations'},
+        {icon:'🛑', t:"Setting boundaries so WhatsApp doesn't run your life"},
+        {icon:'🗓️', t:"A weekly review: what's working, what's not"}
+      ]},
+      { icon:'🔗', title:'Turning Customers Into Your Sales Team', subs:[
+        {icon:'🌱', t:'Building a referral system that runs itself'},
+        {icon:'⭐', t:'Getting reviews and testimonials on WhatsApp'},
+        {icon:'👑', t:'Creating a VIP list for your best customers'},
+        {icon:'♻️', t:'Re-selling to past customers the right way'},
+        {icon:'📷', t:'Using status updates to sell without "selling"'},
+        {icon:'🏘️', t:'Building a community around your brand'}
+      ]}
+  ]}
+];
+const EXTRA_MODULES = [
+  { icon:'🎁', title:'Extra Module: Content That Attracts Buyers On WhatsApp Status', d:'What to post on your status so people come to you already interested, before they even message.' },
+  { icon:'🎁', title:'Extra Module: Handling Refunds & Difficult Customers', d:'Scripts and boundaries for the conversations every WhatsApp seller eventually has to have.' }
+];
+const BONUS_ITEM = { icon:'🎉', title:'Bonus: Done-For-You WhatsApp Closing Scripts Pack', d:'Copy-paste scripts for every stage of the conversation, from first reply to final close, so you\'re never stuck on what to say.' };
+
+function renderModule(m, i){
+  const allSubs = m.trainings.reduce((acc, tr) => acc.concat(tr.subs), []).slice(0, 6);
+  return `
+    <div class="panel" style="border-left-color:var(--steel);">
+      <div class="panel-head"><span style="font-size:20px;">${m.icon}</span><h3 style="margin:0; font-size:17px;">Module ${i+1}: ${m.title}</h3></div>
+      <div>
+        ${allSubs.map(s=>`<div style="display:flex; gap:8px; font-size:13.5px; color:var(--muted); padding:3px 0;"><span>${s.icon}</span><span>${s.t}</span></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+function pageLearn(){
+  return `
+    ${mark()}
+    <div class="pad">
+      <div class="eyebrow">The WhatsApp Closing System</div>
+      <h2 style="font-size:24px;">Here's What You're Learning Inside</h2>
+      <p>Four modules, eight core trainings, and a set of extras built to fix exactly where your WhatsApp sales are breaking down.</p>
+      ${CURRICULUM.map((m,i)=>renderModule(m,i)).join('')}
+
+      <div class="eyebrow" style="margin-top:6px;">Plus</div>
+      ${EXTRA_MODULES.map(em=>`
+        <div class="panel" style="border-left-color:var(--gold);">
+          <div class="panel-head"><span style="font-size:20px;">${em.icon}</span><h3 style="margin:0; font-size:16px;">${em.title}</h3></div>
+          <p style="margin:0;">${em.d}</p>
+        </div>
+      `).join('')}
+      <div class="panel" style="border-left-color:var(--gold); background:rgba(245,184,0,0.08);">
+        <div class="panel-head"><span style="font-size:20px;">${BONUS_ITEM.icon}</span><h3 style="margin:0; font-size:16px;">${BONUS_ITEM.title}</h3></div>
+        <p style="margin:0;">${BONUS_ITEM.d}</p>
+      </div>
+
+      <div class="panel" style="border-left-color:var(--steel); margin-top:18px;">
+        <h3 style="font-size:16px;">This Was Built For You If —</h3>
+        <div style="font-size:13.5px; color:var(--muted);">
+          <div style="padding:4px 0;">✔️ You sell on WhatsApp and people go quiet after asking the price</div>
+          <div style="padding:4px 0;">✔️ You're tired of chasing leads that never reply back</div>
+          <div style="padding:4px 0;">✔️ You know you're losing sales but can't pinpoint where</div>
+          <div style="padding:4px 0;">✔️ You want a repeatable system, not more random tips</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="go('price')">This Is Built For Me →</button></div>
+  `;
+}
+
+/* ============ PAGE: PRICE ============ */
+function pagePrice(){
+  return `
+    ${mark()}
+    <div class="pad">
+      <div class="eyebrow">Investment</div>
+      <h2 style="font-size:24px;">One Price, By Country</h2>
+      <p>One-time payment. No subscription.</p>
+      <div class="panel">
+        ${PRICE_DISPLAY.map(p=>`<div class="price-row"><span>${FLAGS[p.country]||'🌍'} ${p.country}</span><span class="amt">${p.amount}</span></div>`).join('')}
+      </div>
+      <p style="font-size:13px;">Don't see your country? Choose "Other" on the next step and we'll confirm your rate on WhatsApp.</p>
+      <p style="font-size:13px;">Before payment, we'll ask a few questions about your business. This helps us confirm the fit before your slot is reserved.</p>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="go('details')">I Am Ready to Continue →</button></div>
+  `;
+}
+
+/* ============ PAGE: DETAILS ============ */
+function pageDetails(){
+  const d = state.details;
+  return `
+    ${mark()}${segbar(1,4)}
+    <div class="pad">
+      <div class="step-tag" style="display:block; margin-bottom:10px;">STEP <b>01</b> / 04 — LET'S GET TO KNOW YOU</div>
+      <h2 style="font-size:22px;">Let's Get to Know You</h2>
+      <div class="id-strip"><div><div class="lbl">Application ID</div><div class="val">${state.hdiId}</div></div></div>
+
+      <div class="field"><label>Full Name</label><input id="f_name" value="${d.fullName}" oninput="autosaveField('details','fullName',this.value)"></div>
+      <div class="field"><label>Email Address</label><input id="f_email" type="email" value="${d.email}" oninput="autosaveField('details','email',this.value)"></div>
+      <div class="field"><label>WhatsApp Number</label>
+        <div class="phone-row">
+          <select id="f_whatsapp_code" onchange="autosaveField('details','whatsappCode',this.value)">
+            ${DIAL_CODES.map(dc=>`<option value="${dc.code}" ${d.whatsappCode===dc.code?'selected':''}>${dc.flag} ${dc.code}</option>`).join('')}
+          </select>
+          <input id="f_whatsapp" type="tel" placeholder="Phone number" value="${d.whatsapp}" oninput="autosaveField('details','whatsapp',this.value)">
+        </div>
+      </div>
+      <div class="field"><label>Country</label>
+        <select id="f_country" onchange="autosaveField('details','country',this.value)">
+          <option value="">Select your country</option>
+          ${Object.keys(COUNTRY_GROUPS).map(c=>`<option value="${c}" ${d.country===c?'selected':''}>${FLAGS[c]||''} ${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field"><label>Business Name</label><input id="f_bizname" value="${d.businessName}" oninput="autosaveField('details','businessName',this.value)"></div>
+      <div class="field"><label>Business Type</label><input id="f_biztype" placeholder="e.g. Skincare, Fashion, Consulting" value="${d.businessType}" oninput="autosaveField('details','businessType',this.value)"></div>
+      <div id="d_error" class="field-error"></div>
+      <p style="font-size:12.5px;">Everything here autosaves as you type — refreshing or coming back later won't lose it.</p>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="submitDetails()">Continue →</button></div>
+  `;
+}
+function submitDetails(){
+  const name = document.getElementById('f_name').value.trim();
+  const email = document.getElementById('f_email').value.trim();
+  const whatsapp = document.getElementById('f_whatsapp').value.trim();
+  const country = document.getElementById('f_country').value;
+  const errEl = document.getElementById('d_error');
+  if(!name || !email || !whatsapp || !country){
+    if(errEl) errEl.textContent = 'Please fill in your name, email, WhatsApp number, and country to continue.';
+    return;
+  }
+  saveState();
+  sendToSheet('details_submitted'); sendToSheet('qualification_started');
+  go('application');
+}
+
+/* ============ PAGE: APPLICATION ============ */
+function pageApplication(){
+  const q = state.qual;
+  return `
+    ${mark()}${segbar(2,4)}
+    <div class="pad">
+      <div class="step-tag" style="display:block; margin-bottom:10px;">STEP <b>02</b> / 04 — QUALIFICATION</div>
+      <h2 style="font-size:22px;">Tell Us About Your Business</h2>
+
+      <div class="field"><label>What does your business sell, and how do you currently sell it?</label><textarea id="q_business" oninput="autosaveField('qual','q1',this.value)">${q.q1}</textarea></div>
+      <div class="field"><label>What's actually happening on WhatsApp right now that's costing you sales?</label><textarea id="q_problem" placeholder="e.g. people ask the price and go quiet" oninput="autosaveField('qual','q2',this.value)">${q.q2}</textarea></div>
+      <div class="field"><label>If this got fixed, what would that actually change for your business?</label><textarea id="q_outcome" oninput="autosaveField('qual','q3',this.value)">${q.q3}</textarea></div>
+
+      <div class="field"><label>Are you ready to invest in fixing this now?</label>
+        <div class="gate-row">
+          <div class="gate-tile ${q.q4==='Yes, ready now'?'selected':''}" onclick="setGate('q4','Yes, ready now')">Yes, ready now</div>
+          <div class="gate-tile ${q.q4==='Not right now'?'selected':''}" onclick="setGate('q4','Not right now')">Not right now</div>
+        </div>
+      </div>
+      <div class="field"><label>How soon do you want this fixed?</label>
+        <div class="gate-row">
+          <div class="gate-tile ${q.q5==='As soon as possible'?'selected':''}" onclick="setGate('q5','As soon as possible')">As soon as possible</div>
+          <div class="gate-tile ${q.q5==='Just exploring'?'selected':''}" onclick="setGate('q5','Just exploring')">Just exploring</div>
+        </div>
+      </div>
+      <div class="field"><label>Anything else you'd like us to know? (optional)</label><textarea id="q_notes" oninput="autosaveField('qual','q6',this.value)">${q.q6}</textarea></div>
+      <div id="q_error" class="field-error"></div>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="submitApplication()">I Want This Now →</button></div>
+  `;
+}
+function setGate(key, value){ state.qual[key] = value; saveState(); sendToSheet('question_answered'); render(); }
+function submitApplication(){
+  const q = state.qual; const errEl = document.getElementById('q_error');
+  if(!q.q1.trim() || !q.q2.trim() || !q.q3.trim()){ if(errEl) errEl.textContent = 'Please answer the three questions about your business before continuing.'; return; }
+  if(!q.q4 || !q.q5){ if(errEl) errEl.textContent = 'Please select an answer for both readiness questions above.'; return; }
+
+  if(q.q4 === 'Not right now'){
+    q.category='Disqualified'; q.disqualificationReason='Not ready to invest now'; saveState();
+    sendToSheet('dropped_not_ready'); go('disqualified'); return;
+  }
+  if(q.q5 === 'Just exploring'){
+    q.category='Disqualified'; q.disqualificationReason='Just exploring'; saveState();
+    sendToSheet('dropped_just_exploring'); go('disqualified'); return;
+  }
+  q.category='Qualified'; saveState(); sendToSheet('qualified');
+  if(typeof fbq==='function'){ fbq('track','Lead'); }
+  go('faq');
+}
+
+/* ============ PAGE: FAQ ============ */
+const FAQS = [
+  { q:"What happens right after I pay?", a:"You confirm your payment on the next screen, send your receipt on WhatsApp, and once it's verified you get added straight into the private group with your access and your first training." },
+  { q:"Is the training live or recorded?", a:"Both. You get live closing sessions, and every session is recorded and dropped in the group, so nothing you paid for depends on you showing up at a fixed time." },
+  { q:"What if I miss a live class?", a:"You still have access. The recording goes into the group right after, and you keep it for good, so missing one class doesn't lock you out of anything." },
+  { q:"Will I actually make sales from this?", a:"Yes, that's the entire point. This isn't theory, it's the exact scripts and follow-up system for turning the enquiries you're already getting into paid customers." },
+  { q:"I've never done this before, can I really learn it?", a:"Yes. Nothing here needs technical skill, you're already messaging customers on WhatsApp, this just gives you the words and the structure to close more of them." },
+  { q:"How long do I have access?", a:"Lifetime access to the material and the group, this isn't a subscription you have to keep paying to keep." },
+  { q:"Do I need any technical skill to start?", a:"No, everything is explained step by step, built for business owners, not developers." },
+  { q:"Will this work for a service business, not just products?", a:"Yes, the follow-up and closing system works whether you're selling a product or booking a service, the examples cover both." },
+  { q:"What if I already have some kind of WhatsApp sales process?", a:"That's fine, most people refine what they already have instead of starting over from zero." },
+  { q:"Is there a guarantee, can I get my money back?", a:"Yes, this comes with a 100% money-back guarantee. Show up, go through the training and apply it, and if you genuinely don't find it valuable, you get every dollar back." }
+];
+function pageFaq(){
+  return `
+    ${mark()}
+    <div class="pad">
+      <h2 style="font-size:22px;">Before You Decide, Read This</h2>
+      ${FAQS.map(f=>`<details class="accordion-item"><summary>${f.q}</summary><div class="a-body">${f.a}</div></details>`).join('')}
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="sendToSheet('payment_initiated'); if(typeof fbq==='function'){ fbq('track','InitiateCheckout', {value: 5000, currency: 'NGN'}); } go('payment')">This Is For Me, Let's Continue →</button></div>
+  `;
+}
+
+/* ============ PAGE: PAYMENT ============ */
+function paymentBlockFor(country){
+  const group = COUNTRY_GROUPS[country] || 'INTL';
+  const flag = FLAGS[country] || '🌍';
+  const amount = priceFor(country);
+
+  if(group === 'NG'){
+    return `<div class="pay-card"><div class="cap">${flag} Nigeria · Bank Transfer</div><div class="amount">${amount}</div>
+      <div class="row"><span>Bank</span><b>Access Bank</b></div>
+      <div class="row"><span>Account Number</span><b>1871066032</b></div>
+      <div class="row"><span>Account Name</span><b>Ibrahim Habib</b></div></div>
+      <p style="font-size:13px;">Nigeria payments are through Access Bank only.</p>`;
+  }
+  if(group === 'SL'){
+    return `<div class="pay-card"><div class="cap">${flag} Sierra Leone · Agent</div><div class="amount">${amount}</div>
+      <div class="row"><span>Agent</span><b>Daniel</b></div>
+      <div class="row"><span>Account</span><b>76 116323</b></div>
+      <div class="row"><span>Phone</span><b>+232 76 116323</b></div></div>
+      <p style="font-size:13px;">Pay to this account and send the receipt on the next step. Nestuge and MTN MoMo aren't available for Sierra Leone.</p>`;
+  }
+  if(group === 'AFRICA_OTHER'){
+    return `
+      <div class="pay-card"><div class="cap">${flag} ${country}</div><div class="amount">${amount}</div>
+        <a class="nestuge-btn" href="${NESTUGE_LINK}" target="_blank" rel="noopener">Pay via Nestuge →</a>
+        <div class="or-div">or</div>
+        <div class="row"><span>MTN MoMo</span><b>2349038610341</b></div>
+        <div class="row"><span>Account Name</span><b>Ibrahim Habib</b></div>
+      </div>`;
+  }
+  /* INTL — Nestuge primary, bank transfer as fallback */
+  const tab = state.intlTab;
+  let block = '';
+  if(tab === 'USD'){
+    block = `<div class="pay-card"><div class="row"><span>Bank</span><b>Lead Bank</b></div>
+      <div class="row"><span>Account Name</span><b>Habib Opeyemi Ibrahim</b></div>
+      <div class="row"><span>Account Number</span><b>218848403073</b></div>
+      <div class="row"><span>Routing (Wire/ACH)</span><b>101019644</b></div></div>`;
+  } else {
+    block = `<div class="pay-card"><div class="row"><span>Bank</span><b>Clear Junction Limited</b></div>
+      <div class="row"><span>Sort Code</span><b>04-06-05</b></div>
+      <div class="row"><span>Account Number</span><b>29554191</b></div></div>`;
+  }
+  return `
+    <div class="pay-card"><div class="cap">${flag} ${country}</div><div class="amount">${amount}</div>
+      <a class="nestuge-btn" href="${NESTUGE_LINK}" target="_blank" rel="noopener">Pay via Nestuge →</a>
+    </div>
+    <div class="or-div">or use a bank transfer instead</div>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button class="btn-text" style="border:1px solid var(--line); ${tab==='USD'?'background:var(--gold); color:#000;':''}" onclick="setIntlTab('USD')">USD</button>
+      <button class="btn-text" style="border:1px solid var(--line); ${tab==='GBP'?'background:var(--gold); color:#000;':''}" onclick="setIntlTab('GBP')">GBP</button>
+    </div>
+    ${block}`;
+}
+function setIntlTab(t){ state.intlTab = t; saveState(); render(); }
+
+function pagePayment(){
+  return `
+    ${mark()}
+    <div class="pad">
+      <h2 style="font-size:22px;">You've Qualified. Next Is Payment.</h2>
+      <div class="id-strip">
+        <div><div class="lbl">Add this to your transfer</div><div class="val">${state.hdiId}</div></div>
+        <button class="copy-btn" id="copyBtn" onclick="copyHdiId()">Copy</button>
+      </div>
+      <p style="font-size:13px;">Include this ID in your transfer narration or description, it's how we match your payment to your application. Keep it, you'll need it again on the next step.</p>
+      ${paymentBlockFor(state.details.country)}
+      <p style="font-size:13px;">Once you've paid, continue to confirm it. We'll manually verify your payment and open your access.</p>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="go('confirmation')">Confirm My Enrollment →</button></div>
+  `;
+}
+
+/* ============ PAGE: CONFIRMATION ============ */
+function pageConfirmation(){
+  const d = state.details;
+  return `
+    ${mark()}
+    <div class="pad">
+      <h2 style="font-size:22px;">Confirm Your Payment</h2>
+      <div class="field"><label>Full Name</label><input id="c_name" value="${d.fullName}"></div>
+      <div class="field"><label>Email Address</label><input id="c_email" type="email" value="${d.email}"></div>
+      <div class="field"><label>Payment Method</label>
+        <select id="c_method">
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="Mobile Money">Mobile Money</option>
+          <option value="Agent">Agent</option>
+          <option value="Nestuge">Nestuge</option>
+        </select>
+      </div>
+      <div class="field"><label>HDI ID (your payment reference)</label>
+        <input id="c_ref" value="${state.hdiId}" disabled>
+        <div class="hint">This is the code you added to your transfer. If you forgot to include it, mention "${state.hdiId}" when you message us on WhatsApp.</div>
+      </div>
+      <div class="field"><label>Country</label><input value="${d.country}" disabled>
+        <div class="hint">Tapping below opens WhatsApp with your HDI ID and name already filled in. Attach your receipt screenshot to that message before sending it.</div>
+      </div>
+      <div id="c_error" class="field-error"></div>
+    </div>
+    <div class="bottom-bar"><button class="btn btn-gold" onclick="submitConfirmation()">Continue to WhatsApp →</button></div>
+  `;
+}
+function submitConfirmation(){
+  const name = document.getElementById('c_name').value.trim();
+  const email = document.getElementById('c_email').value.trim();
+  const ref = document.getElementById('c_ref').value.trim();
+  const method = document.getElementById('c_method').value;
+  const errEl = document.getElementById('c_error');
+  if(!name || !email){ if(errEl) errEl.textContent = 'Please fill in your name and email so we can find your application.'; return; }
+  state.details.fullName = name; state.details.email = email;
+  state.payment.method = method; state.payment.reference = ref; state.payment.status = 'pending';
+  saveState(); sendToSheet('payment_submitted');
+  if(typeof fbq==='function'){ fbq('track','Purchase', {value: 5000, currency: 'NGN'}); }
+  const waText = encodeURIComponent('Hello HDI, I have completed my payment and I am ready for access. HDI ID: ' + state.hdiId + '. Name: ' + name + '. Please confirm my access.\n(Attaching my payment receipt to this message.)');
+  window.open('https://wa.me/' + REVIEW_WHATSAPP_NUMBER + '?text=' + waText, '_blank');
+  go('pending');
+}
+
+/* ============ PAGE: PENDING / ACCESS / DISQUALIFIED ============ */
+function pagePending(){
+  return `${mark()}<div class="center">
+    <div class="balloon-field">
+      <span class="balloon">🎈</span><span class="balloon">🎈</span><span class="balloon">🎈</span><span class="balloon">🎈</span><span class="balloon">🎈</span>
+    </div>
+    <div class="badge">🎉</div>
+    <h2 style="font-size:22px;">Congratulations, You're In!</h2>
+    <p>Thanks, ${state.details.fullName ? state.details.fullName.split(' ')[0] : 'there'}. Your place is secured under <strong style="color:var(--white);">${state.hdiId}</strong>.</p>
+    <p>One last step: send your payment screenshot on WhatsApp so we can verify it and open your access, this protects your spot from being shared by people who haven't paid. You'll hear back shortly after.</p>
+    <div class="fine">HABIB DIGITAL INSTITUTE</div>
+  </div>`;
+}
+function pageAccess(){
+  const firstName = state.details.fullName ? state.details.fullName.split(' ')[0] : 'there';
+  return `${mark()}<div class="center">
+    <div class="badge">✓</div>
+    <h1 style="font-size:26px;">Confirmed, ${firstName}.</h1>
+    <p>Your access is ready.</p>
+    <div class="panel" style="text-align:left;"><p style="margin:0 0 6px 0; color:var(--white);">✓ Payment confirmed</p><p style="margin:0; color:var(--white);">✓ HDI access ready</p></div>
+    <a class="btn btn-gold" style="display:block; text-decoration:none;" href="https://chat.whatsapp.com/L6jGvRd93AZ8ffycYY7nQr?s=cl&p=a&mlu=4&ilr=4" target="_blank">Join the HDI WhatsApp Group</a>
+    <div class="fine">HABIB DIGITAL INSTITUTE</div>
+  </div>`;
+}
+function pageDisqualified(){
+  return `${mark()}<div class="center">
+    <div class="badge closed">✕</div>
+    <h2 style="font-size:22px;">This Opportunity Has Closed for You</h2>
+    <p>Based on your answers, this isn't the right time for you to join HDI, so this application ends here.</p>
+    <p>This exact opportunity, this price, this cohort, won't come back around for you again. Doors like this one don't stay open, and we can't hold a place for someone who isn't ready to move right now.</p>
+    <p>We understand, and we wish you well. Before you go, here's something valuable for your business either way.</p>
+    <a class="btn btn-ghost" style="display:block; text-decoration:none; margin-top:6px;" href="https://drive.google.com/drive/folders/12VzbciJuaws2PkoEfkNAiQ9tcbkS63rV" target="_blank">Access Free Resource</a>
+    <p style="font-size:12.5px; margin-top:10px;">Why People View Your Business But Don't Buy</p>
+    <div class="fine">HABIB DIGITAL INSTITUTE</div>
+  </div>`;
+}
+
+/* ============ ROUTER ============ */
+function render(){
+  try{
+    if(state.page === 'access' && state.payment.status !== 'confirmed'){
+      state.page = state.payment.status === 'pending' ? 'pending' : 'payment'; saveState();
+    }
+    let html = '';
+    switch(state.page){
+      case 'opening': html = pageOpening(); break;
+      case 'learn': html = pageLearn(); break;
+      case 'price': html = pagePrice(); break;
+      case 'details': html = pageDetails(); break;
+      case 'application': html = pageApplication(); break;
+      case 'faq': html = pageFaq(); break;
+      case 'payment': html = pagePayment(); break;
+      case 'confirmation': html = pageConfirmation(); break;
+      case 'pending': html = pagePending(); break;
+      case 'access': html = pageAccess(); break;
+      case 'disqualified': html = pageDisqualified(); break;
+      default: html = pageOpening();
+    }
+    app.innerHTML = html;
+  }catch(err){
+    app.innerHTML = `${mark()}<div class="center"><h2>Something went wrong loading this page</h2><p>Please refresh, or tap below to start over.</p><button class="btn btn-gold" onclick="restartFunnel()">Start Over</button></div>`;
+    try{ console.error('HDI application render error:', err); }catch(e){}
+  }
+}
+function restartFunnel(){ state = defaultState(); saveState(); render(); }
+window.addEventListener('error', function(){
+  if(!app.innerHTML.trim()){
+    app.innerHTML = `${mark()}<div class="center"><h2>This page needs a refresh</h2><button class="btn btn-gold" onclick="location.reload()">Reload</button></div>`;
+  }
+});
+updateStorageWarning();
+render();
+</script>
+</body>
+</html>
